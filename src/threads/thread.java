@@ -27,12 +27,19 @@ public class thread extends Thread{
     }
 
     public void run(){
-        if(start > end){
+        if(start > end ){
             doWrite(errorMessage);
         }
         else{
-            for (counter = start; counter<end;counter++){
-                doWrite("\n" + id + ": " + counter);
+            if(id == "a"){
+                for (counter = start; counter<end;counter++){
+                    doWrite("\n" + id + ": " + counter);
+                }
+            }
+            if(id == "b"){
+                for (counter = end; counter>start ;counter--){
+                    doWrite("\n" + id + ": " + counter);
+                }
             }
         }
     }

@@ -110,7 +110,7 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         thread thread1 = new thread(taThread1, -5, 15, "a");
         thread1.start();
-        thread thread2 = new thread(taThread2, 8, -100, "b");
+        thread thread2 = new thread(taThread2, 8, 100, "b");
         thread2.start();
         thread thread3 = new thread(taThread3, -25, 15, "c");
         thread3.start();
