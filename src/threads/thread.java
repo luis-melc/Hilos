@@ -16,112 +16,64 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author luis
  */
 public class thread extends Thread {
-    private int counter = 0;
-    private ArrayList<String> numeros = new ArrayList<String>();
-
-    public int start;
-    public int end;
+    public File file;
     public String id = "";
-    private String errorMessage = "No se puede contar\n";
-    public JTextArea taWhereToWrite;
 
-    public thread(String _id) {
-        //start = _start;
-        //end = _end;
+    public thread(String _id, File _file) {
         id = _id;
+        file = _file;
     }
 
     public void run() {
-        // System.out.println("id" + id);
-        // for (int i = 0; i < 10; i++) {
-        //     int no = (int) (Math.random() * 9) + 1;
-        //     String noS = Integer.toString(no);
-        //     System.out.println(id + " -->[" + counter + "] -->" + no);
-        //     numeros.add(id + " -->[" + counter + "] -->" + no);
-        //     counter++;
-        // }
 
-        int no = 1;
         try {
-            String ruta = "/home/luis/NetBeansProjects/threads/file.txt";
-            muestraContenido(ruta);
-            // String contenido = "";
-            // Iterator<String> it = numeros.iterator();
-            // while (it.hasNext())
-            //     contenido = contenido + it.next() + "\n";
-            // File file = new File(ruta);
-            // if (!file.exists()) {
-            //     file.createNewFile();
-            // }
 
-            // FileWriter fw = new FileWriter(file);
-            // BufferedWriter bw = new BufferedWriter(fw);
-            // bw.write(contenido);
-            // bw.close();
+            for (int i = 0; i < 10; i++) {
+                String contenido = "";
+                if (file.exists()) {
+                    contenido = muestraContenido("/home/luis/NetBeansProjects/threads/file.txt");
+                    // System.out.println("contenido del archivo: " + contenido);
+
+                }
+                if (contenido == null)
+                    contenido = "";
+                int no = (int) (Math.random() * 9) + 1;
+                if (contenido == "")
+                    contenido = id + " -->[" + i + "] -->" + no;
+                else
+                    contenido = contenido + "\n" + id + " -->[" + i + "] -->" + no;
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                System.out.println("Contenido a agregar: " + contenido);
+                bw.write(contenido);
+                bw.close();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
-    public static void muestraContenido(String archivo) throws FileNotFoundException, IOException {
+
+    public static String muestraContenido(String archivo) throws FileNotFoundException, IOException {
+        String content = "";
         String cadena;
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
-        while((cadena = b.readLine())!=null) {
-            System.out.println(cadena);
+        while ((cadena = b.readLine()) != null) {
+            content = content + "\n" +cadena;
         }
         b.close();
+        System.out.println("contenido del archivo: "+ content);
+        return content;
     }
 
-    // public static void main(String[] args) throws IOException {
-    //     muestraContenido("/home/mario/archivo.txt");
-    // }
 }
-
-
-
-// import java.lang.Thread;
-// import java.util.Random;
-// class Tuto36 implements Runnable{
-//         public static final int MAX=7;
-//      private Thread hilo;
-//      private String msg;
-
-//      public Tuto36(String m){
-//         msg=m;
-//         hilo=new Thread(this);
-//         hilo.start();
-//      }
-//      @Override
-//      public void run(){
-
-//         System.out.println("iniciando hilo ..."+this.msg);
-
-//         try{
-
-//            for(int i=0;i<=MAX;i++){    
-//            Thread.sleep(1000);
-//            System.out.println("No. aleatorio generado: "+aleatorio());
-//           }
-
-//         }catch(InterruptedException ex){
-//                 System.err.println(ex.getCause());
-//         }
-
-//         System.out.println("Finalizando hilo..."+this.msg);
-//      }
-
-//      public long aleatorio(){
-//         long numero;
-// Random r=new Random();
-//         numero=(long)r.nextInt()*99;
-//         return numero;
-//      }
-
-// }

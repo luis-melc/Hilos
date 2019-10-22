@@ -108,14 +108,11 @@ public class frmMain extends javax.swing.JFrame {
 
     private void btnActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionActionPerformed
         // TODO add your handling code here:
-        thread thread1 = new thread("a");
-        thread1.start();
-        thread thread2 = new thread("b");
-        thread2.start();
-        thread thread3 = new thread("c");
-        thread3.start();
-        thread thread4 = new thread("d");
-        thread4.start();
+        //thread thread1 = new thread("a");
+        //thread1.start();
+        //thread thread2 = new thread("b");
+        //thread2.start();
+        
     }//GEN-LAST:event_btnActionActionPerformed
 
     /**
